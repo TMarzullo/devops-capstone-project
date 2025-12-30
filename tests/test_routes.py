@@ -159,4 +159,21 @@ class TestAccountService(TestCase):
         # quick spot-check of fields
         ids = {a["id"] for a in data}
         self.assertTrue(all(a.id in ids for a in accounts))
+    
+    # ------- UPDATE (PUT) -------
+    def test_update_account(self):
+        """It should Update an account with a partial payload via PUT"""
+        account = AccountFactory()
+        resp = self.client.post(BASE_URL, json=account.serialize())
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+
+        new_account = resp.get_json()
+        new_account["name"] = "New Name"
+        resp = self.client.put(
+            f"{BASE_URL}/{new_account['id']}",
+            json=new_account
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(data["name"], "New Name")
 
