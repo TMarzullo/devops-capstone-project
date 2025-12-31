@@ -47,6 +47,12 @@ spec:
       - name: image
         value: "python:3.9-slim"
       - name: args
-        value: ["--select=E9,F63,F7,F82", "--count","--max-complexity=10","--max-line-length=127","--statistics"]
+        value: [
+          "service",
+          "--count",
+          "--select=E9,F63,F7,F82",
+          "--show-source",
+          "--statistics"
+        ]
       runAfter:
         - clone
