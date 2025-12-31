@@ -25,6 +25,7 @@ HTTPS_ENVIRON = {'wsgi.url_scheme': 'https'}
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
+
 class TestAccountService(TestCase):
     """Account Service Tests"""
 
@@ -162,7 +163,7 @@ class TestAccountService(TestCase):
         # quick spot-check of fields
         ids = {a["id"] for a in data}
         self.assertTrue(all(a.id in ids for a in accounts))
-    
+
     # ------- UPDATE (PUT) -------
     def test_update_account(self):
         """It should Update an account with a partial payload via PUT"""
